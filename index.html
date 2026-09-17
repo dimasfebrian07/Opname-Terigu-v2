@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opname Terigu & Tapioka — GWIP Stage 1</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+<header>
+  <div>
+    <span class="eyebrow">GWIP STAGE 1</span>
+    <h1>Opname Terigu & Tapioka</h1>
+    <p>Hitung per zak, otomatis jadi kilogram, lalu generate laporan ke WhatsApp.</p>
+  </div>
+  <div class="date-box" id="today"></div>
+</header>
+
+<main>
+<section class="card">
+  <div class="section-title">
+    <div><h2>Input Opname</h2><p>Setiap Submit menambah hasil ke merk yang dipilih.</p></div>
+    <span class="save-status">● Tersimpan otomatis</span>
+  </div>
+
+  <div class="grid">
+    <label>Shift
+      <select id="shift"><option>1</option><option selected>2</option><option>3</option></select>
+    </label>
+    <label>Jenis Bahan
+      <select id="category"></select>
+    </label>
+    <label>Merk
+      <div class="brand-row">
+        <select id="brand"></select>
+        <button id="addBrandBtn" type="button">+ Tambah Merk</button>
+      </div>
+    </label>
+    <label>Jumlah Zak
+      <input id="bags" type="number" min="0.01" step="0.01" placeholder="Contoh: 50">
+      <small id="weightInfo">1 zak = 25 kg</small>
+    </label>
+  </div>
+
+  <div class="conversion">
+    <div><span>Berat / zak</span><strong id="perBag">25 kg</strong></div>
+    <b>×</b>
+    <div><span>Jumlah zak</span><strong id="bagPreview">0</strong></div>
+    <b>=</b>
+    <div class="result"><span>Hasil</span><strong id="kgPreview">0 kg</strong></div>
+  </div>
+  <button class="submit" id="submitBtn">SUBMIT & SIMPAN</button>
+</section>
+
+<section class="stats">
+  <div class="stat"><span>Merk Terdata</span><strong id="brandCount">0</strong></div>
+  <div class="stat"><span>Terigu Soft</span><strong id="softTotal">0 kg</strong></div>
+  <div class="stat"><span>Terigu Medium</span><strong id="mediumTotal">0 kg</strong></div>
+  <div class="stat"><span>Tapioka</span><strong id="tapiokaTotal">0 kg</strong></div>
+</section>
+
+<section class="card">
+  <div class="section-title">
+    <div><h2>Rekap Opname</h2><p>Merk yang sama otomatis digabung saat laporan WhatsApp dibuat.</p></div>
+    <div class="top-actions">
+      <button class="wa" id="waBtn">Generate WhatsApp</button>
+      <button class="danger" id="clearBtn">Reset Opname Aktif</button>
+    </div>
+  </div>
+
+  <div class="filters">
+    <input type="date" id="filterDate">
+    <select id="filterShift"><option value="">Semua Shift</option><option>1</option><option>2</option><option>3</option></select>
+    <select id="filterCategory"><option value="">Semua Bahan</option><option>Terigu Soft</option><option>Terigu Medium</option><option>Tapioka</option></select>
+    <input type="search" id="search" placeholder="Cari merk...">
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Waktu</th><th>Shift</th><th>Bahan</th><th>Merk</th><th>Zak</th><th>Kg</th><th>Aksi</th></tr></thead>
+    <tbody id="historyBody"></tbody>
+  </table>
+  </div>
+  <div class="empty" id="empty">Belum ada riwayat opname.</div>
+</section>
+
+<section class="card preview-card">
+  <div class="section-title">
+    <div><h2>Preview WhatsApp</h2><p>Format laporan tanpa total keseluruhan.</p></div>
+  </div>
+  <pre id="waPreview">Belum ada data opname.</pre>
+  <button class="copy" id="copyBtn">Salin Format</button>
+</section>
+</main>
+</div>
+
+<div class="modal hidden" id="brandModal">
+ <div class="modal-box">
+  <button class="close" id="closeModal">×</button>
+  <h3>Tambah Merk</h3>
+  <p>Merk disimpan untuk kategori bahan yang sedang dipilih.</p>
+  <input id="newBrand" placeholder="Contoh: Sinar Jaya">
+  <button class="submit" id="saveBrand">Simpan Merk</button>
+ </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
